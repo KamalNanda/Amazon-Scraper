@@ -4,8 +4,9 @@ const urls = require('./url');
 const URL = urls;
 const fs = require('fs');
 
-(async ()=>{
-    let productData = [];
+const scrape = async () => {
+    try{
+         let productData = [];
     for(let product of URL){
         const response = await request({
             uri: product.url,
@@ -43,4 +44,10 @@ const fs = require('fs');
         fs.writeFileSync( "./data.json" , JSON.stringify(productData, null , 4), {encoding: 'utf-8'});
         
     }
-})()
+    } catch(error){
+        console.log(error)
+    }
+}
+
+scrape()
+ 
